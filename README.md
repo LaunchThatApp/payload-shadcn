@@ -5,7 +5,7 @@ A plugin for PayloadCMS that replaces default admin UI components with [shadcn/u
 ## Installation
 
 ```bash
-npm install @acme/payload-shadcn
+pnpm install @launchthat.apps/payload-shadcn
 ```
 
 ## Usage
@@ -13,9 +13,8 @@ npm install @acme/payload-shadcn
 Add the plugin to your PayloadCMS configuration:
 
 ```typescript
-import { buildConfig } from "payload/config";
-
-import { shadcnPlugin } from "@acme/payload-shadcn";
+import { shadcnPlugin } from "@launchthat.apps/payload-shadcn";
+import { buildConfig } from "payload";
 
 export default buildConfig({
   plugins: [
