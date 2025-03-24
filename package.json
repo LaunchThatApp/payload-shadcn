@@ -1,6 +1,6 @@
 {
   "name": "@launchthat.apps/payload-shadcn",
-  "version": "0.1.4",
+  "version": "0.1.5",
   "description": "Shadcn UI plugin for PayloadCMS",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -22,7 +22,8 @@
   "homepage": "https://github.com/LaunchThatApp/payload-shadcn#readme",
   "files": [
     "dist",
-    "src"
+    "src",
+    "public"
   ],
   "scripts": {
     "build": "tsc",

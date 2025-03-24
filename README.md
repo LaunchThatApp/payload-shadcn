@@ -1,5 +1,7 @@
 # PayloadCMS Shadcn UI Plugin
 
+![PayloadCMS Shadcn UI Plugin](https://raw.githubusercontent.com/LaunchThatApp/payload-shadcn/main/public/images/users-shadcn.png)
+
 A plugin for PayloadCMS that replaces default admin UI components with [shadcn/ui](https://ui.shadcn.com/) components.
 
 ## Installation
