@@ -1,3 +1,5 @@
+import fs from "fs";
+import path from "path";
 import { type Config } from "payload";
 
 // We'll define a simplified type for AdminViewComponent
@@ -37,7 +39,63 @@ export interface ShadcnPluginOptions {
   editView?: {
     collections: string[];
   };
+
+  /**
+   * Additional CSS to inject into the admin panel
+   * This will be injected via a style tag in the beforeDashboard component
+   * @default ""
+   */
+  customCSS?: string;
+
+  /**
+   * Path to the custom.scss file where styles should be imported
+   * @example "app/(payload)/custom.scss"
+   */
+  customScssPath?: string;
+
+  /**
+   * Whether to automatically inject the shadcn styles import into custom.scss
+   * @default true
+   */
+  injectStyles?: boolean;
 }
+
+/**
+ * Injects the shadcn styles import into the custom.scss file
+ */
+const injectStylesImport = (customScssPath: string) => {
+  try {
+    // Ensure the directory exists
+    const dir = path.dirname(customScssPath);
+    if (!fs.existsSync(dir)) {
+      fs.mkdirSync(dir, { recursive: true });
+    }
+
+    // The import statement to add
+    const importStatement =
+      '@import "@launchthat.apps/payload-shadcn/styles.css";';
+
+    // Read existing content or create new file
+    let content = "";
+    if (fs.existsSync(customScssPath)) {
+      content = fs.readFileSync(customScssPath, "utf-8");
+      // Check if import already exists
+      if (content.includes(importStatement)) {
+        return;
+      }
+    }
+
+    // Add import at the beginning of the file
+    const newContent = `${importStatement}\n${content}`;
+    fs.writeFileSync(customScssPath, newContent);
+
+    console.log(
+      `✨ Successfully injected shadcn styles import into ${customScssPath}`,
+    );
+  } catch (error) {
+    console.error(`Error injecting styles import: ${error}`);
+  }
+};
 
 /**
  * PayloadCMS Shadcn UI Plugin
@@ -56,10 +114,18 @@ export const shadcnPlugin =
       editView: {
         collections: options.editView?.collections ?? [],
       },
+      customCSS: options.customCSS ?? "",
+      customScssPath: options.customScssPath ?? "app/(payload)/custom.scss",
+      injectStyles: options.injectStyles ?? true,
     };
 
     // If plugin is disabled, return unmodified config
     if (!opts.enabled) return incomingConfig;
+
+    // Inject styles if enabled
+    if (opts.injectStyles && opts.customScssPath) {
+      injectStylesImport(opts.customScssPath);
+    }
 
     // Clone the config to avoid mutating the original
     const config = {
@@ -69,6 +135,16 @@ export const shadcnPlugin =
         ...(incomingConfig.admin || {}),
         components: {
           ...(incomingConfig.admin?.components || {}),
+          // Inject dynamic styles through a component
+          beforeDashboard: [
+            ...(incomingConfig.admin?.components?.beforeDashboard || []),
+            {
+              Component: () => ({
+                __html: `<style>${opts.customCSS}</style>`,
+              }),
+              memoize: false,
+            },
+          ],
         },
       },
     };
@@ -82,7 +158,6 @@ export const shadcnPlugin =
         // Determine if this collection should use shadcn components
         const shouldUseListView =
           opts.enableAll || opts.listView.collections.includes(collection.slug);
-        // const shouldUseEditView = opts.enableAll || opts.editView.collections.includes(collection.slug);
 
         // If no views should be overridden for this collection, return it unchanged
         if (!shouldUseListView) return collection;
@@ -97,16 +172,9 @@ export const shadcnPlugin =
                 ...collection.admin?.components?.views,
                 ...(shouldUseListView && {
                   list: {
-                    Component:
-                      "@acme/payload-shadcn/components/views/ListView#ListView",
+                    Component: "@launchthat.apps/payload-shadcn/rsc#ListView",
                   },
                 }),
-                // Add edit view override when implemented
-                // ...(shouldUseEditView && {
-                //   edit: {
-                //     Component: "@acme/payload-shadcn/components/views/EditView#EditView",
-                //   },
-                // }),
               },
             },
           },

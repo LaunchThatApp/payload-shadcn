@@ -6,6 +6,6 @@ type Props = ListViewServerProps & ServerProps & {
         };
     };
 };
-export declare function ListView(props: Props): Promise<import("react").JSX.Element>;
+export declare function ListView(props: Props): Promise<import("react/jsx-runtime").JSX.Element>;
 export {};
 //# sourceMappingURL=ListView.d.ts.map

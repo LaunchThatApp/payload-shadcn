@@ -6,5 +6,5 @@ export default function ClientListView({ items, collectionSlug, collectionLabel,
     totalDocs: any;
     canCreate: boolean;
     columnState: Column[];
-}): import("react").JSX.Element;
+}): import("react/jsx-runtime").JSX.Element;
 //# sourceMappingURL=ListView.client.d.ts.map

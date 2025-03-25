@@ -19,11 +19,11 @@ export type ChartConfig = {
 declare function ChartContainer({ id, className, children, config, ...props }: React.ComponentProps<"div"> & {
     config: ChartConfig;
     children: React.ComponentProps<typeof RechartsPrimitive.ResponsiveContainer>["children"];
-}): React.JSX.Element;
+}): import("react/jsx-runtime").JSX.Element;
 declare const ChartStyle: ({ id, config }: {
     id: string;
     config: ChartConfig;
-}) => React.JSX.Element | null;
+}) => import("react/jsx-runtime").JSX.Element | null;
 declare const ChartTooltip: typeof RechartsPrimitive.Tooltip;
 declare function ChartTooltipContent({ active, payload, className, indicator, hideLabel, hideIndicator, label, labelFormatter, labelClassName, formatter, color, nameKey, labelKey, }: React.ComponentProps<typeof RechartsPrimitive.Tooltip> & React.ComponentProps<"div"> & {
     hideLabel?: boolean;
@@ -31,11 +31,11 @@ declare function ChartTooltipContent({ active, payload, className, indicator, hi
     indicator?: "line" | "dot" | "dashed";
     nameKey?: string;
     labelKey?: string;
-}): React.JSX.Element | null;
+}): import("react/jsx-runtime").JSX.Element | null;
 declare const ChartLegend: typeof RechartsPrimitive.Legend;
 declare function ChartLegendContent({ className, hideIcon, payload, verticalAlign, nameKey, }: React.ComponentProps<"div"> & Pick<RechartsPrimitive.LegendProps, "payload" | "verticalAlign"> & {
     hideIcon?: boolean;
     nameKey?: string;
-}): React.JSX.Element | null;
+}): import("react/jsx-runtime").JSX.Element | null;
 export { ChartContainer, ChartTooltip, ChartTooltipContent, ChartLegend, ChartLegendContent, ChartStyle, };
 //# sourceMappingURL=chart.d.ts.map

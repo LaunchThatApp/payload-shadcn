@@ -1,36 +1,90 @@
-# PayloadCMS Shadcn UI Plugin
+# @launchthat.apps/payload-shadcn
 
-![PayloadCMS Shadcn UI Plugin](https://raw.githubusercontent.com/LaunchThatApp/payload-shadcn/main/public/images/posts-shadcn.png)
-![PayloadCMS Shadcn UI Plugin](https://raw.githubusercontent.com/LaunchThatApp/payload-shadcn/main/public/images/categories-shadcn.png)
+A PayloadCMS plugin that adds Shadcn UI components to your PayloadCMS admin panel.
 
-A plugin for PayloadCMS that replaces default admin UI components with [shadcn/ui](https://ui.shadcn.com/) components.
+## Features
+
+- Adds Shadcn UI components to your PayloadCMS admin panel
+- Configurable per collection
+- Easy integration with PayloadCMS
+- Supports all Shadcn UI components
 
 ## Installation
 
 ```bash
-pnpm install @launchthat.apps/payload-shadcn
+npm install @launchthat.apps/payload-shadcn
+# or
+yarn add @launchthat.apps/payload-shadcn
+# or
+pnpm add @launchthat.apps/payload-shadcn
 ```
 
 ## Usage
 
-Add the plugin to your PayloadCMS configuration:
+### Register the plugin in your PayloadCMS config
 
 ```typescript
+// payload.config.ts
 import { shadcnPlugin } from "@launchthat.apps/payload-shadcn";
-import { buildConfig } from "payload";
+import { buildConfig } from "payload/config";
 
 export default buildConfig({
   plugins: [
     shadcnPlugin({
-      // options
+      // Enable for all collections
+      enableAll: true,
+
+      // Or enable for specific collections
+      listView: {
+        collections: ["posts", "categories"],
+      },
     }),
   ],
+  // ... rest of your config
 });
 ```
 
-## Configuration Options
+### Using Shadcn UI components in custom components
 
-The plugin can be configured with the following options:
+To use Shadcn UI components in your custom components, import them from the client entrypoint:
+
+```typescript
+// Your custom component
+'use client';
+
+import { Button } from '@launchthat.apps/payload-shadcn/client';
+
+const MyComponent = () => {
+  return (
+    <div>
+      <Button>Click me</Button>
+    </div>
+  );
+};
+
+export default MyComponent;
+```
+
+## Adding new Shadcn UI components
+
+The plugin is designed to work with the standard Shadcn UI components structure. If you want to add more components:
+
+1. Use the shadcn CLI to add components to the src/components/ui directory:
+
+```bash
+cd payload-plugins/payload-shadcn
+npx shadcn-ui@latest add button
+```
+
+2. The plugin will automatically add the necessary 'use client' directive and handle path aliases.
+
+3. After adding new components, rebuild the plugin:
+
+```bash
+pnpm build
+```
+
+## Configuration Options
 
 ```typescript
 interface ShadcnPluginOptions {
@@ -56,66 +110,33 @@ interface ShadcnPluginOptions {
   listView?: {
     collections: string[];
   };
+
+  /**
+   * Configure which collections should use the shadcn edit view
+   * If enableAll is true, this is ignored and all collections will use shadcn edit view
+   * @example ["posts", "users"]
+   * @default []
+   */
+  editView?: {
+    collections: string[];
+  };
 }
 ```
 
-### Examples
+## Troubleshooting
 
-#### Enable All Components
+If you encounter import errors with Shadcn UI components, check that:
 
-To enable shadcn components for all collections:
+1. All UI components have the 'use client' directive at the top
+2. Path aliases (@/lib/utils, @/components/ui/button) are correctly resolved
+3. The components are being properly built by SWC
 
-```typescript
-shadcnPlugin({
-  enableAll: true,
-});
+Run the `add-use-client.sh` script to ensure all components have the necessary directive:
+
+```bash
+cd payload-plugins/payload-shadcn
+./add-use-client.sh
 ```
-
-#### Enable for Specific Collections
-
-To enable shadcn components only for specific collections:
-
-```typescript
-shadcnPlugin({
-  listView: {
-    collections: ["posts", "users", "categories"],
-  },
-});
-```
-
-#### Disable the Plugin
-
-To disable the plugin entirely:
-
-```typescript
-shadcnPlugin({
-  enabled: false,
-});
-```
-
-## Features
-
-Currently supported features:
-
-- List View: A modern data table with sorting, filtering, and pagination
-  - Supports all collection types
-  - Maintains PayloadCMS field configurations
-  - Enhanced UI/UX with shadcn components
-
-Coming soon:
-
-- Edit View
-- Custom field components
-- Additional admin UI components
-
-## Development
-
-To contribute to this plugin:
-
-1. Clone the repository
-2. Install dependencies: `pnpm install`
-3. Build the plugin: `pnpm build`
-4. Link the plugin to your PayloadCMS project for testing
 
 ## License
 

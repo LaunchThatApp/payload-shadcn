@@ -11,9 +11,10 @@
     "sourceMap": true,
     "strict": true,
     "skipLibCheck": true,
-    "jsx": "preserve",
+    "jsx": "react-jsx",
+    "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
+      "@/*": ["src/*"],
       "@acme/ui": ["../../packages/ui/src"]
     }
   },
