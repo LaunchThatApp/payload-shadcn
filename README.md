@@ -1,13 +1,18 @@
-# @payloadcmsdirectory/shadcn-ui
+# PayloadCMS Shadcn UI Plugin
 
-A PayloadCMS plugin that adds Shadcn UI components to your PayloadCMS admin panel.
+![PayloadCMS Shadcn UI Plugin](https://raw.githubusercontent.com/payloadcmsdirectory/shadcn-ui/main/public/images/posts-shadcn.png)
+![PayloadCMS Shadcn UI Plugin](https://raw.githubusercontent.com/payloadcmsdirectory/shadcn-ui/main/public/images/categories-shadcn.png)
+
+A plugin that integrates Shadcn UI components with PayloadCMS, providing a modern and accessible UI toolkit for your admin panel.
 
 ## Features
 
-- Adds Shadcn UI components to your PayloadCMS admin panel
-- Configurable per collection
-- Easy integration with PayloadCMS
-- Supports all Shadcn UI components
+- 🎨 Modern UI components based on Radix UI
+- 🌗 Dark mode support
+- ♿ Accessible components
+- 🎯 Type-safe with TypeScript
+- 📱 Responsive design
+- 🔧 Highly customizable
 
 ## Installation
 
@@ -21,137 +26,95 @@ pnpm add @payloadcmsdirectory/shadcn-ui
 
 ## Usage
 
-### Register the plugin in your PayloadCMS config
+Add the plugin to your Payload config:
 
 ```typescript
-// payload.config.ts
-import { shadcnPlugin } from "@payloadcmsdirectory/shadcn-ui";
+import shadcnPlugin from "@payloadcmsdirectory/shadcn-ui";
 import { buildConfig } from "payload/config";
 
 export default buildConfig({
   plugins: [
     shadcnPlugin({
-      // Enable for all collections
-      enableAll: true,
-
-      // Or enable for specific collections
-      listView: {
-        collections: ["posts", "categories"],
-      },
+      // Plugin options
+      enableAll: true, // Enable all components
     }),
   ],
-  // ... rest of your config
 });
 ```
 
-### Using Shadcn UI components in custom components
+## Components
 
-To use Shadcn UI components in your custom components, import them from the client entrypoint:
+The plugin includes all the components from Shadcn UI, pre-configured for use with PayloadCMS:
+
+- Accordion
+- Alert Dialog
+- Avatar
+- Button
+- Calendar
+- Card
+- Checkbox
+- Collapsible
+- Command
+- Context Menu
+- Dialog
+- Dropdown Menu
+- Form
+- Hover Card
+- Input
+- Label
+- Menubar
+- Navigation Menu
+- Popover
+- Progress
+- Radio Group
+- ScrollArea
+- Select
+- Separator
+- Sheet
+- Slider
+- Switch
+- Table
+- Tabs
+- Textarea
+- Toast
+- Toggle
+- Tooltip
+
+## Configuration
+
+You can customize which components to enable and their default styles:
 
 ```typescript
-// Your custom component
-'use client';
+shadcnPlugin({
+  // Enable specific components
+  components: {
+    button: true,
+    input: true,
+    select: true,
+    // ...
+  },
 
-import { Button } from '@payloadcmsdirectory/shadcn-ui/client';
-
-const MyComponent = () => {
-  return (
-    <div>
-      <Button>Click me</Button>
-    </div>
-  );
-};
-
-export default MyComponent;
+  // Customize theme
+  theme: {
+    extend: {
+      colors: {
+        // Your custom colors
+      },
+    },
+  },
+});
 ```
 
-## Adding new Shadcn UI components
+## Contributing
 
-The plugin is designed to work with the standard Shadcn UI components structure. If you want to add more components:
+Please read our [Contributing Guide](CONTRIBUTING.md) before submitting a Pull Request to the project.
 
-1. Use the shadcn CLI to add components to the src/components/ui directory:
+## Support
 
-```bash
-cd payload-plugins/payload-shadcn
-npx shadcn-ui@latest add button
-```
-
-2. The plugin will automatically add the necessary 'use client' directive and handle path aliases.
-
-3. After adding new components, rebuild the plugin:
-
-```bash
-pnpm build
-```
-
-## Configuration Options
-
-```typescript
-interface ShadcnPluginOptions {
-  /**
-   * Enable or disable the plugin
-   * @default true
-   */
-  enabled?: boolean;
-
-  /**
-   * Enable all shadcn component overrides
-   * This will override all supported views and components with shadcn versions
-   * @default false
-   */
-  enableAll?: boolean;
-
-  /**
-   * Configure which collections should use the shadcn list view
-   * If enableAll is true, this is ignored and all collections will use shadcn list view
-   * @example ["posts", "users"]
-   * @default []
-   */
-  listView?: {
-    collections: string[];
-  };
-
-  /**
-   * Configure which collections should use the shadcn edit view
-   * If enableAll is true, this is ignored and all collections will use shadcn edit view
-   * @example ["posts", "users"]
-   * @default []
-   */
-  editView?: {
-    collections: string[];
-  };
-}
-```
-
-## Troubleshooting
-
-If you encounter import errors with Shadcn UI components, check that:
-
-1. All UI components have the 'use client' directive at the top
-2. Path aliases (@/lib/utils, @/components/ui/button) are correctly resolved
-3. The components are being properly built by SWC
-
-Run the `add-use-client.sh` script to ensure all components have the necessary directive:
-
-```bash
-cd payload-plugins/payload-shadcn
-./add-use-client.sh
-```
-
-## Using with PayloadCMS Directory CLI
-
-You can easily add this plugin to your PayloadCMS project using the PayloadCMS Directory CLI:
-
-```bash
-# Using npx (recommended)
-npx @payloadcmsdirectory/cli add @payloadcmsdirectory/shadcn-ui
-
-# Or if you have the CLI installed globally
-payloadcli add @payloadcmsdirectory/shadcn-ui
-```
-
-The CLI will automatically add the plugin to your `payloadcmsdirectory.config.js` file and install the necessary dependencies.
+- [Documentation](https://github.com/payloadcmsdirectory/shadcn-ui#readme)
+- [Issues](https://github.com/payloadcmsdirectory/shadcn-ui/issues)
+- [Discussions](https://github.com/payloadcmsdirectory/shadcn-ui/discussions)
 
 ## License
 
-MIT
+MIT © [PayloadCMS Directory](https://payloadcms.directory)

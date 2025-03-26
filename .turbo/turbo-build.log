@@ -1,0 +1,22 @@
+
+
+> @payloadcmsdirectory/shadcn-ui@0.2.0 build /Users/desmondtatilian/Builds/t3-turbo/payload-plugins/payload-shadcn
+> pnpm clean && pnpm build:swc && pnpm build:types && pnpm copyfiles
+
+
+> @payloadcmsdirectory/shadcn-ui@0.2.0 clean /Users/desmondtatilian/Builds/t3-turbo/payload-plugins/payload-shadcn
+> rimraf dist
+
+
+> @payloadcmsdirectory/shadcn-ui@0.2.0 build:swc /Users/desmondtatilian/Builds/t3-turbo/payload-plugins/payload-shadcn
+> NODE_ENV=production swc ./src -d ./dist --config-file .swcrc --strip-leading-paths --copy-files
+
+Successfully compiled: 63 files, copied 1 file with swc (68.72ms)
+
+> @payloadcmsdirectory/shadcn-ui@0.2.0 build:types /Users/desmondtatilian/Builds/t3-turbo/payload-plugins/payload-shadcn
+> tsc --emitDeclarationOnly --declaration --outDir dist
+
+
+> @payloadcmsdirectory/shadcn-ui@0.2.0 copyfiles /Users/desmondtatilian/Builds/t3-turbo/payload-plugins/payload-shadcn
+> copyfiles -u 1 "src/**/*.{css,scss,ttf,woff,woff2,eot,svg,jpg,png,json,js}" dist/
+

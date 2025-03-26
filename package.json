@@ -1,6 +1,6 @@
 {
   "name": "@payloadcmsdirectory/shadcn-ui",
-  "version": "0.2.0",
+  "version": "0.2.1",
   "description": "Shadcn UI components for PayloadCMS",
   "type": "module",
   "main": "./dist/index.js",
@@ -21,6 +21,7 @@
       "require": "./dist/rsc/index.js",
       "types": "./dist/rsc/index.d.ts"
     },
+    "./styles/globals.css": "./dist/styles/globals.css",
     "./globals.css": "./dist/styles/globals.css",
     "./postcss/v4": "./dist/postcss/v4/index.js",
     "./config/tailwind": {
@@ -41,12 +42,12 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/LaunchThatApp/payload-shadcn.git"
+    "url": "git+https://github.com/payloadcmsdirectory/shadcn-ui.git"
   },
   "bugs": {
-    "url": "https://github.com/LaunchThatApp/payload-shadcn/issues"
+    "url": "https://github.com/payloadcmsdirectory/shadcn-ui/issues"
   },
-  "homepage": "https://github.com/LaunchThatApp/payload-shadcn#readme",
+  "homepage": "https://github.com/payloadcmsdirectory/shadcn-ui#readme",
   "files": [
     "dist/**/*"
   ],
