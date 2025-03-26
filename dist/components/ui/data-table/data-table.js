@@ -47,7 +47,7 @@ export function DataTable({ collectionLabel, collectionSlug, columns, data, onRo
                     _jsxs("div", {
                         children: [
                             _jsxs(Button, {
-                                variant: "outline",
+                                variant: "destructive",
                                 onClick: ()=>router.push(`/admin/collections/${collectionSlug}/create`),
                                 children: [
                                     "Add New ",

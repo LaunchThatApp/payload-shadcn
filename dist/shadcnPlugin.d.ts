@@ -29,6 +29,22 @@ export interface ShadcnPluginOptions {
     editView?: {
         collections: string[];
     };
+    /**
+     * Additional CSS to inject into the admin panel
+     * This will be injected via a style tag in the beforeDashboard component
+     * @default ""
+     */
+    customCSS?: string;
+    /**
+     * Path to the custom.scss file where styles should be imported
+     * @example "app/(payload)/custom.scss"
+     */
+    customScssPath?: string;
+    /**
+     * Whether to automatically inject the shadcn styles import into custom.scss
+     * @default true
+     */
+    injectStyles?: boolean;
 }
 /**
  * PayloadCMS Shadcn UI Plugin

@@ -73,7 +73,7 @@ const injectStylesImport = (customScssPath: string) => {
 
     // The import statement to add
     const importStatement =
-      '@import "@launchthat.apps/payload-shadcn/styles.css";';
+      '@import "@launchthat.apps/payload-shadcn/globals.css";';
 
     // Read existing content or create new file
     let content = "";
@@ -135,16 +135,6 @@ export const shadcnPlugin =
         ...(incomingConfig.admin || {}),
         components: {
           ...(incomingConfig.admin?.components || {}),
-          // Inject dynamic styles through a component
-          beforeDashboard: [
-            ...(incomingConfig.admin?.components?.beforeDashboard || []),
-            {
-              Component: () => ({
-                __html: `<style>${opts.customCSS}</style>`,
-              }),
-              memoize: false,
-            },
-          ],
         },
       },
     };

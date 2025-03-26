@@ -90,7 +90,7 @@ export function DataTable<TData, TValue>({
         />
         <div>
           <Button
-            variant="outline"
+            variant="destructive"
             onClick={() =>
               router.push(`/admin/collections/${collectionSlug}/create`)
             }

@@ -7,7 +7,7 @@ export function DataTablePagination({ table }) {
         className: "flex items-center justify-between px-2",
         children: [
             _jsxs("div", {
-                className: "flex-1 text-sm text-muted-foreground",
+                className: "text-muted-foreground flex-1 text-sm",
                 children: [
                     table.getFilteredRowModel().rows.length,
                     " row(s) total."
@@ -28,7 +28,7 @@ export function DataTablePagination({ table }) {
                                 onChange: (e)=>{
                                     table.setPageSize(Number(e.target.value));
                                 },
-                                className: "h-8 w-[70px] rounded-md border border-input bg-transparent px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-primary",
+                                className: "border-input focus:ring-primary h-8 w-[70px] rounded-md border bg-transparent px-2 py-1 text-sm focus:ring-1 focus:outline-none",
                                 children: [
                                     10,
                                     20,

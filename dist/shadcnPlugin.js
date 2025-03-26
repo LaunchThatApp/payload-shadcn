@@ -1,3 +1,28 @@
+import fs from "fs";
+import path from "path";
+const injectStylesImport = (customScssPath)=>{
+    try {
+        const dir = path.dirname(customScssPath);
+        if (!fs.existsSync(dir)) {
+            fs.mkdirSync(dir, {
+                recursive: true
+            });
+        }
+        const importStatement = '@import "@launchthat.apps/payload-shadcn/globals.css";';
+        let content = "";
+        if (fs.existsSync(customScssPath)) {
+            content = fs.readFileSync(customScssPath, "utf-8");
+            if (content.includes(importStatement)) {
+                return;
+            }
+        }
+        const newContent = `${importStatement}\n${content}`;
+        fs.writeFileSync(customScssPath, newContent);
+        console.log(`✨ Successfully injected shadcn styles import into ${customScssPath}`);
+    } catch (error) {
+        console.error(`Error injecting styles import: ${error}`);
+    }
+};
 export const shadcnPlugin = (options = {})=>(incomingConfig)=>{
         const opts = {
             enabled: options.enabled ?? true,
@@ -7,9 +32,15 @@ export const shadcnPlugin = (options = {})=>(incomingConfig)=>{
             },
             editView: {
                 collections: options.editView?.collections ?? []
-            }
+            },
+            customCSS: options.customCSS ?? "",
+            customScssPath: options.customScssPath ?? "app/(payload)/custom.scss",
+            injectStyles: options.injectStyles ?? true
         };
         if (!opts.enabled) return incomingConfig;
+        if (opts.injectStyles && opts.customScssPath) {
+            injectStylesImport(opts.customScssPath);
+        }
         const config = {
             ...incomingConfig,
             collections: [

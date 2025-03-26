@@ -14,7 +14,7 @@ export function DataTablePagination<TData>({
 }: DataTablePaginationProps<TData>) {
   return (
     <div className="flex items-center justify-between px-2">
-      <div className="flex-1 text-sm text-muted-foreground">
+      <div className="text-muted-foreground flex-1 text-sm">
         {table.getFilteredRowModel().rows.length} row(s) total.
       </div>
       <div className="flex items-center space-x-6 lg:space-x-8">
@@ -25,7 +25,7 @@ export function DataTablePagination<TData>({
             onChange={(e) => {
               table.setPageSize(Number(e.target.value));
             }}
-            className="h-8 w-[70px] rounded-md border border-input bg-transparent px-2 py-1 text-sm focus:outline-none focus:ring-1 focus:ring-primary"
+            className="border-input focus:ring-primary h-8 w-[70px] rounded-md border bg-transparent px-2 py-1 text-sm focus:ring-1 focus:outline-none"
           >
             {[10, 20, 30, 40, 50].map((pageSize) => (
               <option key={pageSize} value={pageSize}>
