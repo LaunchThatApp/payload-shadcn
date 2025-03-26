@@ -1,4 +1,4 @@
-# @launchthat.apps/payload-shadcn
+# @payloadcmsdirectory/shadcn-ui
 
 A PayloadCMS plugin that adds Shadcn UI components to your PayloadCMS admin panel.
 
@@ -12,11 +12,11 @@ A PayloadCMS plugin that adds Shadcn UI components to your PayloadCMS admin pane
 ## Installation
 
 ```bash
-npm install @launchthat.apps/payload-shadcn
+npm install @payloadcmsdirectory/shadcn-ui
 # or
-yarn add @launchthat.apps/payload-shadcn
+yarn add @payloadcmsdirectory/shadcn-ui
 # or
-pnpm add @launchthat.apps/payload-shadcn
+pnpm add @payloadcmsdirectory/shadcn-ui
 ```
 
 ## Usage
@@ -25,7 +25,7 @@ pnpm add @launchthat.apps/payload-shadcn
 
 ```typescript
 // payload.config.ts
-import { shadcnPlugin } from "@launchthat.apps/payload-shadcn";
+import { shadcnPlugin } from "@payloadcmsdirectory/shadcn-ui";
 import { buildConfig } from "payload/config";
 
 export default buildConfig({
@@ -52,7 +52,7 @@ To use Shadcn UI components in your custom components, import them from the clie
 // Your custom component
 'use client';
 
-import { Button } from '@launchthat.apps/payload-shadcn/client';
+import { Button } from '@payloadcmsdirectory/shadcn-ui/client';
 
 const MyComponent = () => {
   return (
@@ -137,6 +137,20 @@ Run the `add-use-client.sh` script to ensure all components have the necessary d
 cd payload-plugins/payload-shadcn
 ./add-use-client.sh
 ```
+
+## Using with PayloadCMS Directory CLI
+
+You can easily add this plugin to your PayloadCMS project using the PayloadCMS Directory CLI:
+
+```bash
+# Using npx (recommended)
+npx @payloadcmsdirectory/cli add @payloadcmsdirectory/shadcn-ui
+
+# Or if you have the CLI installed globally
+payloadcli add @payloadcmsdirectory/shadcn-ui
+```
+
+The CLI will automatically add the plugin to your `payloadcmsdirectory.config.js` file and install the necessary dependencies.
 
 ## License
 

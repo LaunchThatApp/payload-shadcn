@@ -1,5 +1,5 @@
 {
-  "name": "@launchthat.apps/payload-shadcn",
+  "name": "@payloadcmsdirectory/shadcn-ui",
   "version": "0.2.0",
   "description": "Shadcn UI components for PayloadCMS",
   "type": "module",
